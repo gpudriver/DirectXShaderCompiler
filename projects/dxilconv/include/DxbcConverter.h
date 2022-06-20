@@ -46,7 +46,7 @@ struct __declspec(uuid("5F956ED5-78D1-4B15-8247-F7187614A041")) IDxbcConverter
       _In_ UINT32 NumOutputSignatureElements,
       _In_opt_z_ LPCVOID pPatchConstantSignature,
       _In_ UINT32 NumPatchConstantSignatureElements,
-      _In_opt_z_ LPCWSTR pExtraOptions, _Out_ IDxcBlob **ppDxilModule,
+      _In_opt_z_ LPCWSTR pExtraOptions, _COM_Outptr_ IDxcBlob **ppDxilModule,
       _Outptr_result_maybenull_z_ LPWSTR *ppDiag) = 0;
 };
 
