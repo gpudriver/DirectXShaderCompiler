@@ -46,7 +46,7 @@ struct IDxcIncludeHandler;
 /// This can be used with GetProcAddress to get the DxcCreateInstance function.
 typedef HRESULT(__stdcall *DxcCreateInstanceProc)(_In_ REFCLSID rclsid,
                                                   _In_ REFIID riid,
-                                                  _Out_ LPVOID *ppv);
+                                                  _COM_Outptr_ LPVOID *ppv);
 
 /// \brief Typedef for DxcCreateInstance2 function pointer.
 ///
@@ -54,7 +54,7 @@ typedef HRESULT(__stdcall *DxcCreateInstanceProc)(_In_ REFCLSID rclsid,
 typedef HRESULT(__stdcall *DxcCreateInstance2Proc)(_In_ IMalloc *pMalloc,
                                                    _In_ REFCLSID rclsid,
                                                    _In_ REFIID riid,
-                                                   _Out_ LPVOID *ppv);
+                                                   _COM_Outptr_ LPVOID *ppv);
 
 /// \brief Creates a single uninitialized object of the class associated with a
 /// specified CLSID.
@@ -71,18 +71,17 @@ typedef HRESULT(__stdcall *DxcCreateInstance2Proc)(_In_ IMalloc *pMalloc,
 ///
 /// While this function is similar to CoCreateInstance, there is no COM
 /// involvement.
-extern "C" DXC_API_IMPORT
-    HRESULT __stdcall DxcCreateInstance(_In_ REFCLSID rclsid, _In_ REFIID riid,
-                                        _Out_ LPVOID *ppv);
+extern "C" DXC_API_IMPORT HRESULT __stdcall
+DxcCreateInstance(_In_ REFCLSID rclsid, _In_ REFIID riid,
+                  _COM_Outptr_ LPVOID *ppv);
 
 /// \brief Version of DxcCreateInstance that takes an IMalloc interface.
 ///
 /// This can be used to create an instance of the compiler with a custom memory
 /// allocator.
-extern "C" DXC_API_IMPORT
-    HRESULT __stdcall DxcCreateInstance2(_In_ IMalloc *pMalloc,
-                                         _In_ REFCLSID rclsid, _In_ REFIID riid,
-                                         _Out_ LPVOID *ppv);
+extern "C" DXC_API_IMPORT HRESULT __stdcall
+DxcCreateInstance2(_In_ IMalloc *pMalloc, _In_ REFCLSID rclsid,
+                   _In_ REFIID riid, _COM_Outptr_ LPVOID *ppv);
 
 // For convenience, equivalent definitions to CP_UTF8 and CP_UTF16.
 #define DXC_CP_UTF8 65001
