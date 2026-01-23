@@ -339,8 +339,10 @@ public:
 
   /// \brief Creates SPIR-V instructions for gathering the given image.
   ///
-  /// If imageType is not a sampled image type, the OpSampledImage* instructions
-  /// will be generated.
+  /// If the of `image` is a sampled image, then that image will be gathered.
+  /// In this case, `sampler` must be `nullptr`. If `image` is not a sampled
+  /// image, a sampled image will be created by combining `image` and `sampler`.
+  ///
   /// If compareVal is given a non-null value, OpImageDrefGather or
   /// OpImageSparseDrefGather will be generated; otherwise, OpImageGather or
   /// OpImageSparseGather will be generated.
