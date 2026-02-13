@@ -1,0 +1,23 @@
+name: Mirror Microsoft DirectXShaderCompiler
+
+on:
+  schedule:
+    - cron: "0 2 * * *"   # daily at 2 AM UTC
+  workflow_dispatch:
+
+jobs:
+  mirror:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Clone Microsoft repo (mirror mode)
+        run: |
+          git clone --mirror https://github.com/microsoft/DirectXShaderCompiler.git source
+
+      - name: Push to gpudriver mirror
+        env:
+          TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          cd source
+          git remote set-url --push origin https://$TOKEN@github.com/gpudriver/DirectXShaderCompiler.git
+          git push --mirror
